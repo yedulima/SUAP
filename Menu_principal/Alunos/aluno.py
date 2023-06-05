@@ -2,7 +2,7 @@ import json
 
 alunos = {}
 
-with open("Suap/alunos.json", "r") as file:
+with open("Alunos/alunos.json", "r") as file:
     alunos = json.load(file)
     
 def menu_aluno():
@@ -13,6 +13,8 @@ def menu_aluno():
         visualizar_aluno()
     elif pergunta == 3:
         editar_aluno()
+    elif pergunta == 4:
+        deletar_aluno()
 
 def cadastrar_aluno():
     nome = input("Digite o seu nome: ").title()
@@ -47,8 +49,6 @@ def cadastrar_aluno():
         menu_aluno()
     
     
-
-
 def visualizar_aluno():
     print("Estes são os alunos cadastrados: ")
     
@@ -66,6 +66,17 @@ def editar_aluno():
         print("ata")
         for informacoes in alunos[buscar]:
             print(informacoes, alunos[buscar][informacoes])
+            
+def deletar_aluno():
+    encontrar = input("Digite o nome do aluno que você deseja apagar: ")
+    if encontrar in alunos:
+        print(encontrar)
+        apagar = int(input("Deseja apagar este aluno: \n[1] Sim \n[2] Não \nResp:  "))    
+        if apagar == 1:
+            del alunos[encontrar]
+        else:
+            deletar_aluno()
     
 menu_aluno()
 
+print(alunos)
