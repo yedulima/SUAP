@@ -63,9 +63,22 @@ def visualizar_aluno():
 def editar_aluno():
     buscar = input("Digite o nome do aluno que você deseja editar: ")
     if buscar in alunos:
-        print("ata")
         for informacoes in alunos[buscar]:
             print(informacoes, alunos[buscar][informacoes])
+            
+    edicao = int(input("O que você deseja alterar: \n[1] Nome e Sobrenome \n[2] Matrícula \n[3] Senha \nResp: "))
+    if edicao == 1:
+        nome = input("Digite o seu nome: ")
+        sobrenome = input("Digite o seu sobrenome: ")
+        novo_nome = nome + ' ' + sobrenome
+
+        alunos[novo_nome] = alunos[buscar]
+        del alunos[buscar]
+    elif edicao == 3 :
+        nova_senha = input("Digite a sua senha: ")
+        alunos[buscar]["Senha"] = nova_senha
+                
+                
             
 def deletar_aluno():
     encontrar = input("Digite o nome do aluno que você deseja apagar: ")
@@ -76,6 +89,13 @@ def deletar_aluno():
             del alunos[encontrar]
         else:
             deletar_aluno()
+    else:
+        print("Este aluno não existe")
+    prosseguir = int(input("Deseja continuar apagando: \n[1] Sim \n[2] Não \nResp: "))
+    if prosseguir == 1:
+        deletar_aluno()
+    else:
+        menu_aluno()
     
 menu_aluno()
 
