@@ -1,4 +1,4 @@
-def Busca_usuario(dicionario_nome, continuar_procurando = True):
+def Busca_turma(continuar_procurando = True):
 
     import os
     import json
@@ -10,43 +10,44 @@ def Busca_usuario(dicionario_nome, continuar_procurando = True):
     
         os.system('cls')
     
-        nome = input("\nInsira o nome do professor ou [0] para\nencerrar a ação: ").strip().lower()
+        turma = input("\nInsira o nome da turma ou [0] para\nencerrar a ação: ").strip().lower()
         
-        if len(nome.replace(' ', '')) < 1:
+        if len(turma.replace(' ', '')) < 1:
             while True:
                 os.system('cls')
-                print("Nome incorreto! Redigite o nome do usuário que você\ndeseja atualizar, ou digite [0] para sair.")
+                print("turma incorreto! Redigite a turma que você\ndeseja procurar, ou digite [0] para sair.")
             
-                nome = input("\nInsira o nome do professor: ").strip().lower()
+                turma = input("\nInsira a turma: ").strip().lower()
             
-                if nome == '0':
+                if turma == '0':
                     return False
             
-                elif len(nome.replace(' ', '')) >= 1:
+                elif len(turma.replace(' ', '')) >= 1:
                     break
         
-        if nome == '0':
+        if turma == '0':
             return False
         
         encontrado = False
 
-        for matricula in dicionario:
-            if nome in dicionario[matricula]["Nome"].lower():
+        for turmas in dicionario:
+            if turma in dicionario[turmas]['Materia'].lower():
                 encontrado = True
 
         if encontrado:
-            print(f"\n{f'---=== {dicionario_nome.upper()} ===---': ^50}\n{'='*50}")
-            matriculas_buscadas = []
-            nome = nome.split(' ')
-            for matricula, info in dicionario.items():
-
-                for nome_item in nome:
-                    if nome_item in info['Nome'].lower() and matricula not in matriculas_buscadas:
-                        if len(matriculas_buscadas) != 0:
+            print(f"\n{f'---=== TURMAS ===---': ^50}\n{'='*50}")
+            turmas_buscadas = []
+            turma = turma.split(' ')
+            for turma_id, info in dicionario.items():
+                
+                for turma_item in turma:
+                    if turma_item in info['Materia'].lower() and turma_id not in turmas_buscadas:
+                        if len(turmas_buscadas) != 0:
                             print(f"{'-'*50: ^50}")
-                        matriculas_buscadas.append(matricula)
-                        nome_usuario = info['Nome']
-                        print(f"{f'Matricula: {matricula}   |   Professor: {nome_usuario}': ^50}")
+                        turmas_buscadas.append(turma_id)
+                        turma_materia = info['Materia']
+                        qtd_alunos = len(info['Alunos'])
+                        print(f"{f'Turma: {turma_id}   |   Materia: {turma_materia}': ^50}   |   Alunos: {qtd_alunos}")
                             
             print("="*50)
             
@@ -64,8 +65,8 @@ def Busca_usuario(dicionario_nome, continuar_procurando = True):
                     print("Opção inválida.")
             
         else:
-            print(f"\nUsuário não encontrado ou nenhum usuário com {nome}\nem seu nome.")
+            print(f"\nUsuário não encontrado ou nenhum usuário com {turma}\nem seu turma.")
             input()
 
 if __name__ == "__main__":
-    Busca_usuario("SIGTur/Dicionarios/Professores.json", "Professores")
+    Busca_turma()

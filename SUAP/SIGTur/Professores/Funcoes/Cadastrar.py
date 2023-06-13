@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-sys.path.insert(0, 'd:\\Aluno\\Documentos\\SUAP-main\\SIGTur\\Funcoes_principais\\')
+sys.path.insert(0, 'd:\\Aluno\\Documentos\\SUAP\\SIGTur\\Funcoes_principais\\')
 
 import Verifica_nome_Modulo
 

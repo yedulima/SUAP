@@ -10,12 +10,12 @@ def Busca_usuario(caminho, dicionario_nome, continuar_procurando = True):
     
         os.system('cls')
     
-        nome = input("\nInsira o nome do professor ou [0] para\nencerrar a ação: ").strip().lower()
+        nome = input(f"\nInsira o nome do(a) {dicionario_nome.lower()} ou [0] para\nencerrar a ação: ").strip().lower()
         
         if len(nome.replace(' ', '')) < 1:
             while True:
                 os.system('cls')
-                print("Nome incorreto! Redigite o nome do usuário que você\ndeseja atualizar, ou digite [0] para sair.")
+                print("Nome incorreto! Redigite o nome do usuário que você\ndeseja procurar, ou digite [0] para sair.")
             
                 nome = input("\nInsira o nome do professor: ").strip().lower()
             
