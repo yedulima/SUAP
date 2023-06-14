@@ -118,16 +118,16 @@ def atualizar_professor():
                     if verifica:
                         Professores[matricula]['Nome'] = nome
                         salvar_arquivo()
-                        print("\nnProfessor atualizado com sucesso.\n")
+                        print(f"\n╔{'─'*35}╗\n| Professor atualizado com sucesso{'|': >3}\n╚{'─'*35}╝\n")
                         return
                     else:
-                        print("\nAção interrompida.\n")
+                        print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
                         break
             
             else:
-                print("\nMatricula não encontrada.\n")
+                print(f"\n{'⚠': ^32}\n╔{'─'*30}╗\n|   Matricula não encontrada{'|': >4}\n╚{'─'*30}╝\n")
     else:
-        print("\nAção interrompida.\n")
+        print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
 
 def visualizar_professores():
     importar_arquivo()
@@ -150,18 +150,18 @@ def deletar_professor():
                 return
             
             elif matricula == ' ' or matricula == '':
-                print("\nA matricula não pode ser vazia.\n")
+                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n| A matricula não pode ser vazia{'|': >2}\n╚{'─'*32}╝\n")
 
             elif matricula in Professores:
                 del Professores[matricula]
-                print("\nProfessor deletado com sucesso.\n")
+                print(f"\n╔{'─'*35}╗\n|   Professor deletado com sucesso{'|': >3}\n╚{'─'*35}╝\n")
                 salvar_arquivo()
                 return
             
             else:
-                print("\nMatricula não encontrada.\n")
+                print(f"\n{'⚠': ^32}\n╔{'─'*30}╗\n|   Matricula não encontrada{'|': >4}\n╚{'─'*30}╝\n")
     else:
-        print("\nAção interrompida.\n")
+        print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
 
 # === FUNÇÕES ESPECIAIS ===
 
@@ -177,7 +177,7 @@ def visualizar_professor_especifico():
                 return
             
             elif matricula == ' ' or matricula == '':
-                print("\nA matricula não pode ser vazia.\n")
+                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n| A matricula não pode ser vazia{'|': >2}\n╚{'─'*32}╝\n")
 
             elif matricula in Professores:
                 print("="*50)
@@ -195,9 +195,9 @@ def visualizar_professor_especifico():
                 return
             
             else:
-                print("\nMatricula não encontrada.\n")
+                print(f"\n{'⚠': ^32}\n╔{'─'*30}╗\n|   Matricula não encontrada{'|': >4}\n╚{'─'*30}╝\n")
     else:
-        print("\nAção interrompida.\n")
+        print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
 
 def visualizar_professor_turmas():
     importar_arquivo()
@@ -213,7 +213,7 @@ def visualizar_professor_turmas():
                 return
             
             elif matricula == ' ' or matricula == '':
-                print("\nA matricula não pode ser vazia.\n")
+                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n| A matricula não pode ser vazia{'|': >2}\n╚{'─'*32}╝\n")
 
             elif matricula in Professores:
                 print("="*50)
@@ -225,9 +225,9 @@ def visualizar_professor_turmas():
                 return
             
             else:
-                print("\nMatricula não encontrada.\n")
+                print(f"\n{'⚠': ^32}\n╔{'─'*30}╗\n|   Matricula não encontrada{'|': >4}\n╚{'─'*30}╝\n")
     else:
-        print("\nAção interrompida.\n")
+        print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
 
 def visualizar_professor_alunos():
     importar_arquivo()
@@ -243,7 +243,7 @@ def visualizar_professor_alunos():
                 return
             
             elif matricula == ' ' or matricula == '':
-                print("\nA matricula não pode ser vazia.\n")
+                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n| A matricula não pode ser vazia{'|': >2}\n╚{'─'*32}╝\n")
 
             elif matricula in Professores:
                 print("="*50)
@@ -259,9 +259,9 @@ def visualizar_professor_alunos():
                 return
             
             else:
-                print("\nMatricula não encontrada.\n")
+                print(f"\n{'⚠': ^32}\n╔{'─'*30}╗\n|   Matricula não encontrada{'|': >4}\n╚{'─'*30}╝\n")
     else:
-        print("\nAção interrompida.\n")
+        print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
 
 if __name__ == "__main__":
     visualizar_professor_especifico()
