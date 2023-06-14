@@ -1,0 +1,5 @@
+{
+    "Matematica": {"Professor": "1", "Alunos": ["1", "2"]},
+    "Informatica": {"Professor": "1", "Alunos": ["2", "3"]},
+    "Geografia": {"Professor": "2", "Alunos": ["1"]}
+}
