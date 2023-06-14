@@ -2,14 +2,20 @@ import json
 
 # === IMPORTANDO DICIONARIOS ===
 
-with open("Dicionarios/Professores.json", "r") as file:
-    Professores = json.load(file)
+def importar_arquivo():
+    global Professores
+    with open("Dicionarios/Professores.json", "r") as file:
+        Professores = json.load(file)
 
-with open("Dicionarios/Turmas.json", "r") as file:
-    Turmas = json.load(file)
+def importar_arquivo_Turmas():
+    global Turmas
+    with open("Dicionarios/Turmas.json", "r") as file:
+        Turmas = json.load(file)
 
-with open("Dicionarios/Alunos.json", "r") as file:
-    Alunos = json.load(file)
+def importar_arquivo_Alunos():
+    global Alunos
+    with open("Dicionarios/Alunos.json", "r") as file:
+        Alunos = json.load(file)
 
 def salvar_arquivo():
     with open("Dicionarios/Professores.json", "w") as file:
@@ -20,24 +26,24 @@ def salvar_arquivo():
 def checa_nome():
 
     while True:
-        nome = input("Insira o nome ou digite [0] para sair: ").strip().title()
+        nome = input("➤  Insira o nome ou digite [0] para sair: ").strip().title()
 
         if nome == '0':
-            print("\nAção interrompida.\n")
+            print(f"\n{'⚠': ^34}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
             return False, None
         elif len(nome.split(' ')) < 2 or any(item.isalpha() != True for item in nome.split(' ')):
-            print("Nome deve conter apenas letras e deve ser composto.")
+            print(f"\n{'⚠': ^34}\n╔{'─'*60}╗\n|     Nome deve conter apenas letras e deve ser composto{'|': >6}\n╚{'─'*60}╝\n")
         else:
             return True, nome
 
 def procurar_professor(continuar_procurando = True):
     while True:
-        nome = input("Insira o nome do professor ou digite [0] para sair: ").strip().lower()
+        nome = input("➤  Insira o nome do professor ou digite [0] para sair: ").strip().lower()
         if nome == '0':
             return False
         
         elif nome == ' ' or nome == '':
-            print("\nNome não deve ser vazio.\n")
+            print(f"\n{'⚠': ^34}\n╔{'─'*25}╗\n| Nome não deve ser vazio{'|': >2}\n╚{'─'*25}╝\n")
 
         else:
             encontrado = False
@@ -65,15 +71,17 @@ def procurar_professor(continuar_procurando = True):
                             return True
                         
                         else:
-                            print("\nOpção inválida!\n")
+                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|     Opção inválida!{'|': >6}\n╚{'─'*25}╝\n")
                 else:
                     return True
             else:
-                print("\nProfessor não encontrado.\n")
+                print(f"\n{'⚠': ^30}\n╔{'─'*28}╗\n|  Professor não encontrado{'|': >3}\n╚{'─'*28}╝\n")
 
 # === C.R.U.D ===
 
 def cadastrar_professor():
+    importar_arquivo()
+
     while True:
         verifica, nome = checa_nome()
         if verifica:
@@ -84,23 +92,25 @@ def cadastrar_professor():
                 matricula = '0'
             Professores[str(int(matricula) + 1)] = {"Nome": nome}
             salvar_arquivo()
-            print("\nProfessor adicionado com sucesso!\n")
+            print(f"\n╔{'─'*35}╗\n| Professor adicionado com sucesso{'|': >3}\n╚{'─'*35}╝\n")
             return
         else:
-            print("\nAção interrompida.\n")
+            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
             break
 
 def atualizar_professor():
+    importar_arquivo()
+
     verifica = procurar_professor()
     
     if verifica:
         while True:
-            matricula = input("Insira a matricula do professor ou digite [0] para sair: ").strip()
+            matricula = input("➤  Insira a matricula do professor ou digite [0] para sair: ").strip()
             if matricula == '0':
                 return
             
             elif matricula == ' ' or matricula == '':
-                print("\nA matricula não pode ser vazia.\n")
+                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n| A matricula não pode ser vazia{'|': >2}\n╚{'─'*32}╝\n")
 
             elif matricula in Professores:
                 while True:
@@ -120,6 +130,8 @@ def atualizar_professor():
         print("\nAção interrompida.\n")
 
 def visualizar_professores():
+    importar_arquivo()
+
     print(f"\n{f'---=== PROFESSORES ===---': ^50}\n{'='*50}")
     print(f"{'Matriculas': ^25}|{'Professor': ^25}\n{'-'*50}")
     for matricula, info in Professores.items():
@@ -127,11 +139,13 @@ def visualizar_professores():
     print("="*50)
 
 def deletar_professor():
+    importar_arquivo()
+
     verifica = procurar_professor()
 
     if verifica:
         while True:
-            matricula = input("Insira a matricula do professor ou digite [0] para sair: ").strip()
+            matricula = input("➤  Insira a matricula do professor ou digite [0] para sair: ").strip()
             if matricula == '0':
                 return
             
@@ -152,11 +166,13 @@ def deletar_professor():
 # === FUNÇÕES ESPECIAIS ===
 
 def visualizar_professor_especifico():
+    importar_arquivo()
+    
     verifica = procurar_professor()
 
     if verifica:
         while True:
-            matricula = input("Insira a matricula do professor ou digite [0] para sair: ").strip()
+            matricula = input("➤  Insira a matricula do professor ou digite [0] para sair: ").strip()
             if matricula == '0':
                 return
             
@@ -184,11 +200,15 @@ def visualizar_professor_especifico():
         print("\nAção interrompida.\n")
 
 def visualizar_professor_turmas():
+    importar_arquivo()
+    importar_arquivo_Turmas()
+    importar_arquivo_Alunos()
+
     verifica = procurar_professor()
 
     if verifica:
         while True:
-            matricula = input("Insira a matricula do professor ou digite [0] para sair: ").strip()
+            matricula = input("➤  Insira a matricula do professor ou digite [0] para sair: ").strip()
             if matricula == '0':
                 return
             
@@ -210,11 +230,15 @@ def visualizar_professor_turmas():
         print("\nAção interrompida.\n")
 
 def visualizar_professor_alunos():
+    importar_arquivo()
+    importar_arquivo_Turmas()
+    importar_arquivo_Alunos()
+
     verifica = procurar_professor()
 
     if verifica:
         while True:
-            matricula = input("Insira a matricula do professor ou digite [0] para sair: ").strip()
+            matricula = input("➤  Insira a matricula do professor ou digite [0] para sair: ").strip()
             if matricula == '0':
                 return
             

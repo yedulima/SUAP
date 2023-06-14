@@ -33,7 +33,7 @@ def visualizar_professores():
 
 def procurar_professor(continuar_procurando = True):
     while True:
-        nome = input("Insira o nome do professor ou digite [0] para sair: ").strip().lower()
+        nome = input("➤  Insira o nome do professor ou digite [0] para sair: ").strip().lower()
         if nome == '0':
             return False
         
@@ -74,7 +74,7 @@ def procurar_professor(continuar_procurando = True):
 
 def procurar_aluno(continuar_procurando = True):
     while True:
-        nome = input("Insira o nome do aluno ou digite [0] para sair: ").strip().lower()
+        nome = input("➤  Insira o nome do aluno ou digite [0] para sair: ").strip().lower()
         if nome == '0':
             return False
         
@@ -115,7 +115,7 @@ def procurar_aluno(continuar_procurando = True):
 
 def procurar_turma(continuar_procurando = True):
     while True:
-        nome = input("Insira o nome da turma ou digite [0] para sair: ").strip().lower()
+        nome = input("➤  Insira o nome da turma ou digite [0] para sair: ").strip().lower()
         if nome == '0':
             return False
         
@@ -187,7 +187,7 @@ def visualizar_turma_especifica(turma):
 
 def criar_turma():
     while True:
-        turma = input("Insira o nome da nova turma ou digite [0] para sair: ").strip().title()
+        turma = input("➤  Insira o nome da nova turma ou digite [0] para sair: ").strip().title()
         if turma == '0':
             print("\nAção interrompida e nenhuma turma criada.\n")
             return
@@ -271,7 +271,7 @@ def criar_turma():
 
 def editar_turma():
     while True:
-        turma = input("Insira o nome da turma para a edição, digite [0] para sair ou\ndigite [P] para procurar pela turma em turmas: ").strip().title()
+        turma = input("➤  Insira o nome da turma para a edição, digite [0] para sair ou\ndigite [P] para procurar pela turma em turmas: ").strip().title()
         if turma == '0':
             print("\nAção interrompida e nenhuma turma editada.\n")
             return
@@ -357,7 +357,7 @@ def editar_turma():
 
 def deletar_turma():
     while True:
-        turma = input("Insira o nome da turma para a deleção, digite [0] para sair ou\ndigite [P] para procurar pela turma em turmas: ").strip().title()
+        turma = input("➤  Insira o nome da turma para a deleção, digite [0] para sair ou\ndigite [P] para procurar pela turma em turmas: ").strip().title()
         if turma == '0':
             return
         
@@ -392,7 +392,7 @@ def deletar_turma():
 
 def visualizar_turma():
     while True:
-        turma = input("Insira o nome da turma para a visualização, digite [0] para sair ou\ndigite [P] para procurar pela turma em turmas: ").strip().title()
+        turma = input("➤  Insira o nome da turma para a visualização, digite [0] para sair ou\ndigite [P] para procurar pela turma em turmas: ").strip().title()
         if turma == '0':
             return
         

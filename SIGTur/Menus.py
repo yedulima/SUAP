@@ -1,8 +1,8 @@
 # === IMPORTES ===
 
-from Funcoes.Funcoes_alunos import *
-from Funcoes.Funcoes_coordenador import *
-from Funcoes.Funcoes_professores import *
+from Funcoes.Funcoes_alunos import cadastrar_aluno, atualizar_aluno, visualizar_alunos, deletar_aluno
+from Funcoes.Funcoes_coordenador import criar_turma, editar_turma, visualizar_turma, deletar_turma
+from Funcoes.Funcoes_professores import cadastrar_professor, atualizar_professor, visualizar_professores, deletar_professor, visualizar_professor_especifico, visualizar_professor_alunos, visualizar_professor_turmas
 
 # === MENUS ===
 
@@ -13,7 +13,7 @@ def menu_inicial():
         global mensagem_inicial
         print(f"╔{'═'*50}╗\n║{'║': >51}\n║{'SEJA BEM VINDO AO SIGTur!': ^50}║\n║{'║': >51}")
         print(f"{'║      Um sistema de gerenciamento de turmas': <51}║\n{'║   aonde você poderá gerir turmas, professores': <51}║\n{'║   e alunos. Por meio de um sistema intuitivo e': <51}║\n{'║          e simples para o usuário usar!': <51}║\n║{'║': >51}\n╚{'═'*50}╝")
-        continuar = input("\nAperte ENTER para que possa continuar: ")
+        continuar = input("\nAperte ENTER para prosseguir: ")
         mensagem_inicial = False
 
     def construcao_mensagem_adeus():
@@ -44,13 +44,13 @@ def menu_alunos():
         escolha = input("\nEscolha: ").strip()
 
         if escolha == '1':
-            pass
+            cadastrar_aluno()
         elif escolha == '2':
-            pass
+            visualizar_alunos()
         elif escolha == '3':
-            pass
+            atualizar_aluno()
         elif escolha == '4':
-            pass
+            deletar_aluno()
         elif escolha == '0':
             break
         else:
@@ -62,19 +62,19 @@ def menu_professores():
         escolha = input("\nEscolha: ").strip()
 
         if escolha == '1':
-            pass
+            cadastrar_professor()
         elif escolha == '2':
-            pass
+            visualizar_professores()
         elif escolha == '3':
-            pass
+            atualizar_professor()
         elif escolha == '4':
-            pass
+            deletar_professor()
         elif escolha == '5':
-            pass
+            visualizar_professor_especifico()
         elif escolha == '6':
-            pass
+            visualizar_professor_turmas()
         elif escolha == '7':
-            pass
+            visualizar_professor_alunos()
         elif escolha == '0':
             break
         else:
@@ -86,18 +86,18 @@ def menu_coordenador():
         escolha = input("\nEscolha: ").strip()
 
         if escolha == '1':
-            pass
+            criar_turma()
         elif escolha == '2':
-            pass
+            visualizar_turma()
         elif escolha == '3':
-            pass
+            editar_turma()
         elif escolha == '4':
-            pass
+            deletar_turma()
         elif escolha == '0':
             break
         else:
             print("\nEscolha inválida.\n")
 
 if __name__ == "__main__":
-    mensagem_inicial = False
+    mensagem_inicial = True
     menu_inicial()
