@@ -40,15 +40,15 @@ def menu_inicial():
 
 def menu_alunos():
     while True:
-        print(f"\n┌{'─'*5: >15}{'─'*9: >20}\n    Opções:\n|{'[1] - Cadastrar': ^21}\n{'[2] - Visualizar': ^24}{'|': >25}\n{'[3] - Atualizar': ^24}\n{'[4] - Deletar': ^22}\n{'[0] - Sair': ^18}\n{'─'*20: >28}{'┘': ^40}")
+        print(f"\n┌{'─'*5: >15}{'─'*9: >20}\n    Opções:\n|{'[1] - Cadastrar': ^21}\n{'[2] - Atualizar': ^24}{'|': >25}\n{'[3] - Visualizar': ^24}\n{'[4] - Deletar': ^22}\n{'[0] - Sair': ^18}\n{'─'*20: >28}{'┘': ^40}")
         escolha = input("\nEscolha: ").strip()
 
         if escolha == '1':
             cadastrar_aluno()
         elif escolha == '2':
-            visualizar_alunos()
-        elif escolha == '3':
             atualizar_aluno()
+        elif escolha == '3':
+            visualizar_alunos()
         elif escolha == '4':
             deletar_aluno()
         elif escolha == '0':
@@ -64,9 +64,9 @@ def menu_professores():
         if escolha == '1':
             cadastrar_professor()
         elif escolha == '2':
-            visualizar_professores()
-        elif escolha == '3':
             atualizar_professor()
+        elif escolha == '3':
+            visualizar_professores()
         elif escolha == '4':
             deletar_professor()
         elif escolha == '5':
@@ -99,5 +99,5 @@ def menu_coordenador():
             print("\nEscolha inválida.\n")
 
 if __name__ == "__main__":
-    mensagem_inicial = True
+    mensagem_inicial =True
     menu_inicial()

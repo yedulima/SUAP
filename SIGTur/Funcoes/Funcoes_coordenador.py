@@ -234,17 +234,94 @@ def visualizar_turma_especifica(turma):
             print(f"Qtd. Alunos: {len(Turmas[turma]['Alunos'])}")
         else:
             print("Qtd. Alunos: Não adicionado ainda")
+
     print(f"{'Alunos': ^50}\n{f'-'*45: ^50}")
 
     if len(Turmas[turma]['Alunos']) != 0:
         print(f"{'Matriculas': ^25}|{'Aluno': ^25}\n{'-'*50}")
         for alunos in Turmas[turma]['Alunos']:
             for aluno in alunos:
-                print(f"{aluno: ^25}|{[Alunos[matricula_aluno]['Nome'] for matricula_aluno in Alunos if matricula_aluno == aluno][0]: ^25}")
+                if aluno not in Alunos:
+                    print(f"{'Desconhecido': ^25}|{'Desconhecido': ^25}")
+                else:
+                    print(f"{aluno: ^25}|{[Alunos[matricula_aluno]['Nome'] for matricula_aluno in Alunos if matricula_aluno == aluno][0]: ^25}")
     else:
         print(f"{'Não adicionado ainda.': ^50}")
     print("="*50)
 
+# === MÓDULOS ===
+
+def editar_professor(turma):
+    while True:
+        professor = input("\nDigite a matrícula do professor, ou:\n[P] - Procurar um professor\n[0] - Sair\nOpção: ").strip()
+        if professor in 'pP':
+            procurar_professor()
+
+        elif professor == '0':
+            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
+            break
+
+        elif professor in Professores:
+            Turmas[turma]['Professor'] = professor
+            print(f"\n╔{'─'*35}╗\n| Professor atualizado com sucesso{'|': >3}\n╚{'─'*35}╝\n")
+            break
+
+        else:
+            print(f"\n{'⚠': ^30}\n╔{'─'*28}╗\n|  Professor não encontrado{'|': >3}\n╚{'─'*28}╝\n")
+
+def editar_alunos(turma):
+    while True:
+        alunos = input("\nDigite a matrícula do aluno, ou:\n[A] - Procurar um aluno\n[0] - Sair\nOpção: ").strip()
+        if alunos in 'aA':
+            procurar_aluno()
+
+        elif alunos == '0':
+            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
+            break
+
+        elif alunos in Alunos:
+            if alunos not in Turmas[turma]['Alunos']:
+                lista_de_alunos = Turmas[turma]['Alunos']
+                lista_de_alunos.append(alunos)
+                Turmas[turma]['Alunos'] = lista_de_alunos
+                print(f"\n╔{'─'*30}╗\n| Aluno atualizado com sucesso{'|': >2}\n╚{'─'*30}╝\n")
+                break
+            else:
+                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|   Aluno já presente na turma{'|': >4}\n╚{'─'*32}╝\n")
+
+        else:
+            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|   Aluno não encontrado{'|': >3}\n╚{'─'*25}╝\n")
+
+def confirmar_edicao(turma):
+    if len(Turmas[turma]['Professor']) == 0:
+        print(f"\n{'⚠': ^44}\n╔{'─'*42}╗\n|   Precisasse adicionar algum professor{'|': >4}\n╚{'─'*42}╝\n")
+
+    elif len(Turmas[turma]['Alunos']) == 0:
+        print(f"\n{'⚠': ^44}\n╔{'─'*42}╗\n|     Precisasse adicionar algum aluno{'|': >6}\n╚{'─'*42}╝\n")
+    
+    else:
+        salvar_arquivo()
+        print(f"\n╔{'─'*35}╗\n|     Turma editada com sucesso{'|': >6}\n╚{'─'*35}╝\n")
+        return
+
+def confirmar_exclusao(turma):
+    while True:
+        print(f"\nTURMA: {turma}")
+        verificacao = input("\nEscreva o nome da turma que você deseja deletar\npara concluir a ação. Ou digite [0] para sair: ")
+
+        if verificacao == '0':
+            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
+            break
+
+        elif verificacao == turma:
+            del Turmas[turma]
+            salvar_arquivo()
+            print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|   A turma exclída com sucesso{'|': >3}\n╚{'─'*32}╝\n")
+            return
+        
+        else:
+            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|      Nome incorreto{'|': >6}\n╚{'─'*25}╝\n")
+            
 # === C.R.U.D ===
 
 def criar_turma():
@@ -272,60 +349,16 @@ def criar_turma():
                 opcao = input("\nO que você deseja adicionar primeiro?\n[1] - Professor\n[2] - Alunos\n[3] - Prévia da turma\n[4] - Criar turma\n[0] - Sair\n\nOpção: ").strip()
 
                 if opcao == '1':
-                    while True:
-                        professor = input("\nDigite a matrícula do professor, ou:\n[P] - Procurar um professor\n[0] - Sair\nOpção: ").strip()
-                        if professor in 'pP':
-                            procurar_professor()
-
-                        elif professor == '0':
-                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
-                            break
-
-                        elif professor in Professores:
-                            Turmas[turma]['Professor'] = professor
-                            print(f"\n╔{'─'*35}╗\n| Professor atualizado com sucesso{'|': >3}\n╚{'─'*35}╝\n")
-                            break
-
-                        else:
-                            print(f"\n{'⚠': ^30}\n╔{'─'*28}╗\n|  Professor não encontrado{'|': >3}\n╚{'─'*28}╝\n")
+                    editar_professor(turma)
 
                 elif opcao == '2':
-                    while True:
-                        alunos = input("\nDigite a matrícula do aluno, ou:\n[A] - Procurar um aluno\n[0] - Sair\nOpção: ").strip()
-                        if alunos in 'aA':
-                            procurar_aluno()
-
-                        elif alunos == '0':
-                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
-                            break
-
-                        elif alunos in Alunos:
-                            if alunos not in Turmas[turma]['Alunos']:
-                                lista_de_alunos = Turmas[turma]['Alunos']
-                                lista_de_alunos.append(alunos)
-                                Turmas[turma]['Alunos'] = lista_de_alunos
-                                print(f"\n╔{'─'*30}╗\n| Aluno atualizado com sucesso{'|': >2}\n╚{'─'*30}╝\n")
-                                break
-                            else:
-                                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|   Aluno já presente na turma{'|': >4}\n╚{'─'*32}╝\n")
-
-                        else:
-                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|   Aluno não encontrado{'|': >3}\n╚{'─'*25}╝\n")
+                    editar_alunos(turma)
 
                 elif opcao == '3':
                     visualizar_turma_especifica(turma)
 
                 elif opcao == '4':
-                    if len(Turmas[turma]['Professor']) == 0:
-                        print(f"\n{'⚠': ^44}\n╔{'─'*42}╗\n|   Precisasse adicionar algum professor{'|': >4}\n╚{'─'*42}╝\n")
-
-                    elif len(Turmas[turma]['Alunos']) == 0:
-                        print(f"\n{'⚠': ^44}\n╔{'─'*42}╗\n|     Precisasse adicionar algum aluno{'|': >6}\n╚{'─'*42}╝\n")
-                    
-                    else:
-                        salvar_arquivo()
-                        print(f"\n╔{'─'*35}╗\n|      Turma criada com sucesso{'|': >6}\n╚{'─'*35}╝\n")
-                        return
+                    confirmar_edicao(turma)
 
                 elif opcao == '0':
                     del Turmas[turma]
@@ -362,60 +395,16 @@ def editar_turma():
                 opcao = input("\nO que você deseja editar:\n[1] - Professor\n[2] - Alunos\n[3] - Prévia da turma\n[4] - Terminar edição\n[0] - Sair\n\nOpção: ").strip()
 
                 if opcao == '1':
-                    while True:
-                        professor = input("\nDigite a matrícula do professor, ou:\n[P] - Procurar um professor\n[0] - Sair\nOpção: ").strip()
-                        if professor in 'pP':
-                            procurar_professor()
-
-                        elif professor == '0':
-                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
-                            break
-
-                        elif professor in Professores:
-                            Turmas[turma]['Professor'] = professor
-                            print(f"\n╔{'─'*35}╗\n| Professor atualizado com sucesso{'|': >3}\n╚{'─'*35}╝\n")
-                            break
-
-                        else:
-                            print(f"\n{'⚠': ^30}\n╔{'─'*28}╗\n|  Professor não encontrado{'|': >3}\n╚{'─'*28}╝\n")
+                    editar_professor(turma)
 
                 elif opcao == '2':
-                    while True:
-                        alunos = input("\nDigite a matrícula do aluno, ou:\n[A] - Procurar um aluno\n[0] - Sair\nOpção: ").strip()
-                        if alunos in 'aA':
-                            procurar_aluno()
-
-                        elif alunos == '0':
-                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
-                            break
-
-                        elif alunos in Alunos:
-                            if alunos not in Turmas[turma]['Alunos']:
-                                lista_de_alunos = Turmas[turma]['Alunos']
-                                lista_de_alunos.append(alunos)
-                                Turmas[turma]['Alunos'] = lista_de_alunos
-                                print(f"\n╔{'─'*30}╗\n| Aluno atualizado com sucesso{'|': >2}\n╚{'─'*30}╝\n")
-                                break
-                            else:
-                                print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|   Aluno já presente na turma{'|': >4}\n╚{'─'*32}╝\n")
-
-                        else:
-                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|   Aluno não encontrado{'|': >3}\n╚{'─'*25}╝\n")
+                    editar_alunos(turma)
 
                 elif opcao == '3':
                     visualizar_turma_especifica(turma)
 
                 elif opcao == '4':
-                    if len(Turmas[turma]['Professor']) == 0:
-                        print(f"\n{'⚠': ^44}\n╔{'─'*42}╗\n|   Precisasse adicionar algum professor{'|': >4}\n╚{'─'*42}╝\n")
-
-                    elif len(Turmas[turma]['Alunos']) == 0:
-                        print(f"\n{'⚠': ^44}\n╔{'─'*42}╗\n|     Precisasse adicionar algum aluno{'|': >6}\n╚{'─'*42}╝\n")
-                    
-                    else:
-                        salvar_arquivo()
-                        print(f"\n╔{'─'*35}╗\n|     Turma editada com sucesso{'|': >6}\n╚{'─'*35}╝\n")
-                        return
+                    confirmar_edicao(turma)
 
                 elif opcao == '0':
                     del Turmas[turma]
@@ -445,22 +434,7 @@ def deletar_turma():
                 print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|     A turma não encontrada{'|': >6}\n╚{'─'*32}╝\n")
                 continue
             
-            while True:
-                print(f"\nTURMA: {turma}")
-                verificacao = input("\nEscreva o nome da turma que você deseja deletar\npara concluir a ação. Ou digite [0] para sair: ")
-
-                if verificacao == '0':
-                    print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
-                    break
-
-                elif verificacao == turma:
-                    del Turmas[turma]
-                    salvar_arquivo()
-                    print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|   A turma exclída com sucesso{'|': >3}\n╚{'─'*32}╝\n")
-                    return
-                
-                else:
-                    print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|      Nome incorreto{'|': >6}\n╚{'─'*25}╝\n")
+            confirmar_exclusao(turma)
 
 def visualizar_turma():
     importar_arquivo()
@@ -485,6 +459,7 @@ def visualizar_turma():
                 continue
             
             visualizar_turma_especifica(turma)
+            break
 
 if __name__ == "__main__":
     pass

@@ -22,3 +22,4 @@
 #print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|     A turma não encontrada{'|': >6}\n╚{'─'*32}╝\n")
 #print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|      Nome incorreto{'|': >6}\n╚{'─'*25}╝\n")
 #print(f"\n{'⚠': ^34}\n╔{'─'*32}╗\n|   A turma exclída com sucesso{'|': >3}\n╚{'─'*32}╝\n")
+#print(f"\n╔{'─'*35}╗\n|     Turma editada com sucesso{'|': >6}\n╚{'─'*35}╝\n")

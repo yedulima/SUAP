@@ -29,46 +29,50 @@ def checa_nome():
             return True, nome
 
 def procurar_aluno(continuar_procurando = True):
-    while True:
-        nome = input("\n➤  Insira o nome do aluno ou digite [0] para sair: ").strip().lower()
-        if nome == '0':
-            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
-            return False
-        
-        elif nome == ' ' or nome == '':
-            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n| Nome não deve ser vazio{'|': >2}\n╚{'─'*25}╝\n")
 
-        else:
-            encontrado = False
-            for info in Alunos.values():
-                if nome in info['Nome'].lower():
-                    encontrado = True
-            if encontrado:
-                print(f"\n{f'---=== ALUNOS ===---': ^50}\n{'='*50}")
-                print(f"{'Matriculas': ^25}|{'Aluno': ^25}\n{'-'*50}")
-                matriculas_buscadas = []
-                nome = nome.split(' ')
-                for matricula, info in Alunos.items():
-                    for nome_item in nome:
-                        if nome_item in info['Nome'].lower() and matricula not in matriculas_buscadas:
-                            matriculas_buscadas.append(matricula)
-                            print(f"{matricula: ^25}|{info['Nome']: ^25}")                   
-                print("="*50)
-                if continuar_procurando:
-                    while True:
-                        opcao = input("Continuar procurando?\n[1] - Sim\n[2] - Não\nOpção: ")
-                        if opcao == '1':
-                            break
+    if len(Alunos) > 0:
+        while True:
+            nome = input("\n➤  Insira o nome do aluno ou digite [0] para sair: ").strip().lower()
+            if nome == '0':
+                print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
+                return False
+            
+            elif nome == ' ' or nome == '':
+                print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n| Nome não deve ser vazio{'|': >2}\n╚{'─'*25}╝\n")
 
-                        elif opcao == '2':
-                            return True
-                        
-                        else:
-                            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|     Opção inválida!{'|': >6}\n╚{'─'*25}╝\n")
-                else:
-                    return True
             else:
-                print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|   Aluno não encontrado{'|': >3}\n╚{'─'*25}╝\n")
+                encontrado = False
+                for info in Alunos.values():
+                    if nome in info['Nome'].lower():
+                        encontrado = True
+                if encontrado:
+                    print(f"\n{f'---=== ALUNOS ===---': ^50}\n{'='*50}")
+                    print(f"{'Matriculas': ^25}|{'Aluno': ^25}\n{'-'*50}")
+                    matriculas_buscadas = []
+                    nome = nome.split(' ')
+                    for matricula, info in Alunos.items():
+                        for nome_item in nome:
+                            if nome_item in info['Nome'].lower() and matricula not in matriculas_buscadas:
+                                matriculas_buscadas.append(matricula)
+                                print(f"{matricula: ^25}|{info['Nome']: ^25}")                   
+                    print("="*50)
+                    if continuar_procurando:
+                        while True:
+                            opcao = input("Continuar procurando?\n[1] - Sim\n[2] - Não\nOpção: ")
+                            if opcao == '1':
+                                break
+
+                            elif opcao == '2':
+                                return True
+                            
+                            else:
+                                print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|     Opção inválida!{'|': >6}\n╚{'─'*25}╝\n")
+                    else:
+                        return True
+                else:
+                    print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|   Aluno não encontrado{'|': >3}\n╚{'─'*25}╝\n")
+    else:
+        print(f"{'Nenhum aluno cadastrado': ^50}")
 
 # === C.R.U.D ===
 
@@ -88,7 +92,6 @@ def cadastrar_aluno():
             print(f"\n╔{'─'*30}╗\n| Aluno adicionado com sucesso{'|': >2}\n╚{'─'*30}╝\n")
             return
         else:
-            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
             break
 
 def atualizar_aluno():
@@ -120,8 +123,6 @@ def atualizar_aluno():
             
             else:
                 print(f"\n{'⚠': ^32}\n╔{'─'*30}╗\n|   Matricula não encontrada{'|': >4}\n╚{'─'*30}╝\n")
-    else:
-        print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
 
 def visualizar_alunos():
     importar_arquivo()
@@ -158,8 +159,6 @@ def deletar_aluno():
             
             else:
                 print(f"\n{'⚠': ^32}\n╔{'─'*30}╗\n|   Matricula não encontrada{'|': >4}\n╚{'─'*30}╝\n")
-    else:
-        print(f"\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
 
 if __name__ == "__main__":
     visualizar_alunos()
