@@ -3,7 +3,7 @@ Trabalho final de programação estruturada, aonde deveríamos criar uma platafo
 
 ## Partes finalizadas
 
-[X] Menus
-[ ] Funções de alunos
-[ ] Funções de professores
+[X] Menus <br>
+[ ] Funções de alunos <br>
+[ ] Funções de professores <br>
 [X] Funções de coordenadores
