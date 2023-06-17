@@ -29,10 +29,10 @@ def checa_nome():
         nome = input("➤  Insira o nome ou digite [0] para sair: ").strip().title()
 
         if nome == '0':
-            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
+            print(f"\n{'⚠': ^34}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
             return False, None
         elif len(nome.split(' ')) < 2 or any(item.isalpha() != True for item in nome.split(' ')):
-            print(f"\n{'⚠': ^62}\n╔{'─'*60}╗\n|     Nome deve conter apenas letras e deve ser composto{'|': >6}\n╚{'─'*60}╝\n")
+            print(f"\n{'⚠': ^34}\n╔{'─'*60}╗\n|     Nome deve conter apenas letras e deve ser composto{'|': >6}\n╚{'─'*60}╝\n")
         else:
             return True, nome
 
@@ -43,7 +43,7 @@ def procurar_professor(continuar_procurando = True):
             return False
         
         elif nome == ' ' or nome == '':
-            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n| Nome não deve ser vazio{'|': >2}\n╚{'─'*25}╝\n")
+            print(f"\n{'⚠': ^34}\n╔{'─'*25}╗\n| Nome não deve ser vazio{'|': >2}\n╚{'─'*25}╝\n")
 
         else:
             encontrado = False
@@ -93,8 +93,9 @@ def cadastrar_professor():
             Professores[str(int(matricula) + 1)] = {"Nome": nome}
             salvar_arquivo()
             print(f"\n╔{'─'*35}╗\n| Professor adicionado com sucesso{'|': >3}\n╚{'─'*35}╝\n")
-            break
+            return
         else:
+            print(f"\n{'⚠': ^27}\n╔{'─'*25}╗\n|    Ação interrompida{'|': >5}\n╚{'─'*25}╝\n")
             break
 
 def atualizar_professor():
@@ -132,12 +133,9 @@ def visualizar_professores():
     importar_arquivo()
 
     print(f"\n{f'---=== PROFESSORES ===---': ^50}\n{'='*50}")
-    if len(Professores) > 0:
-        print(f"{'Matriculas': ^25}|{'Professor': ^25}\n{'-'*50}")
-        for matricula, info in Professores.items():
-            print(f"{matricula: ^25}|{info['Nome']: ^25}")
-    else:
-        print(f"{'Nenhum professor cadastrado': ^50}")
+    print(f"{'Matriculas': ^25}|{'Professor': ^25}\n{'-'*50}")
+    for matricula, info in Professores.items():
+        print(f"{matricula: ^25}|{info['Nome']: ^25}")                   
     print("="*50)
 
 def deletar_professor():

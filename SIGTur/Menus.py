@@ -1,10 +1,20 @@
 # === IMPORTES ===
 
+import json
+
+def importar_arquivos():
+    global Alunos, Professores, Turmas
+    Alunos = json.load(open("Dicionarios/Alunos.json"))
+    Professores = json.load(open("Dicionarios/Professores.json"))
+    Turmas = json.load(open("Dicionarios/Turmas.json"))
+
 from Funcoes.Funcoes_alunos import cadastrar_aluno, atualizar_aluno, visualizar_alunos, deletar_aluno
 from Funcoes.Funcoes_coordenador import criar_turma, editar_turma, visualizar_turma, deletar_turma
 from Funcoes.Funcoes_professores import cadastrar_professor, atualizar_professor, visualizar_professores, deletar_professor, visualizar_professor_especifico, visualizar_professor_alunos, visualizar_professor_turmas
 
 # === MENUS ===
+
+importar_arquivos()
 
 def menu_inicial():
     global mensagem_inicial
@@ -40,15 +50,15 @@ def menu_inicial():
 
 def menu_alunos():
     while True:
-        print(f"\n┌{'─'*5: >15}{'─'*9: >20}\n    Opções:\n|{'[1] - Cadastrar': ^21}\n{'[2] - Atualizar': ^24}{'|': >25}\n{'[3] - Visualizar': ^24}\n{'[4] - Deletar': ^22}\n{'[0] - Sair': ^18}\n{'─'*20: >28}{'┘': ^40}")
+        print(f"\n┌{'─'*5: >15}{'─'*9: >20}\n    Opções:\n|{'[1] - Cadastrar': ^21}\n{'[2] - Visualizar': ^24}{'|': >25}\n{'[3] - Atualizar': ^24}\n{'[4] - Deletar': ^22}\n{'[0] - Sair': ^18}\n{'─'*20: >28}{'┘': ^40}")
         escolha = input("\nEscolha: ").strip()
 
         if escolha == '1':
             cadastrar_aluno()
         elif escolha == '2':
-            atualizar_aluno()
-        elif escolha == '3':
             visualizar_alunos()
+        elif escolha == '3':
+            atualizar_aluno()
         elif escolha == '4':
             deletar_aluno()
         elif escolha == '0':
@@ -64,9 +74,9 @@ def menu_professores():
         if escolha == '1':
             cadastrar_professor()
         elif escolha == '2':
-            atualizar_professor()
-        elif escolha == '3':
             visualizar_professores()
+        elif escolha == '3':
+            atualizar_professor()
         elif escolha == '4':
             deletar_professor()
         elif escolha == '5':
@@ -82,22 +92,40 @@ def menu_professores():
 
 def menu_coordenador():
     while True:
+        importar_arquivos()
         print(f"\n┌{'─'*5: >15}{'─'*9: >20}\n    Opções:\n|{'[1] - Cadastrar': ^21}\n{'[2] - Visualizar': ^24}{'|': >25}\n{'[3] - Atualizar': ^24}\n{'[4] - Deletar': ^22}\n{'[0] - Sair': ^18}\n{'─'*20: >28}{'┘': ^40}")
         escolha = input("\nEscolha: ").strip()
 
         if escolha == '1':
-            criar_turma()
+
+            if len(Alunos) and len(Professores):
+                criar_turma()
+            else:
+                print("Precisa de pelo menos um professor e um aluno cadastrados.")
+
         elif escolha == '2':
-            visualizar_turma()
+            if len(Turmas):
+                visualizar_turma()
+            else:
+                print("Precisa de pelo menos uma turma cadastrada.")
+
         elif escolha == '3':
-            editar_turma()
+            if len(Turmas):
+                editar_turma()
+            else:
+                print("Precisa de pelo menos uma turma cadastrada.")
+
         elif escolha == '4':
-            deletar_turma()
+            if len(Turmas):
+                deletar_turma()
+            else:
+                print("Precisa de pelo menos uma turma cadastrada.")
+
         elif escolha == '0':
             break
         else:
             print("\nEscolha inválida.\n")
 
 if __name__ == "__main__":
-    mensagem_inicial =True
+    mensagem_inicial = False
     menu_inicial()
