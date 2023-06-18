@@ -1,0 +1,32 @@
+      === BASES ===
+
+Bases para informar quando
+ quaisquer ação acontecer.
+
+           ---
+
+AÇÕES BOAS:
+print(f"\n╔{'─'*40}╗\n|{f'{nome_dicionario.title()} deletado com sucesso!': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n╔{'─'*40}╗\n|{f'{nome_dicionario.title()} atualizado com sucesso!': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n╔{'─'*40}╗\n|{f'{nome_dicionario.title()} adicionado com sucesso!': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n╔{'─'*40}╗\n|{'Turma criada com sucesso': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+
+ERROS:
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Ação inválida':^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Ação interrompida':^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Matricula não encontrada': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'{nome_dicionario.title()} não encontrado': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Nome inválido': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Nome deve conter apenas letras e': ^40}{'|': ^2}\n|{'deve ser composto': ^40}{'|': ^2}\n╚{'─'*40}╝")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Escolha inválida':^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter alunos':^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter professores':^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter turmas':^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa de ter pelo menos um':^40}{'|': ^2}\n|{'professor e um aluno cadastrados': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter pelo menos uma':^40}{'|': ^2}\n|{'turma cadastrada': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Aluno não encontrado': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Turma já existente': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Turma não encontrada': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Aluno já presente na turma': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Não encontrado': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Integridade do dicionário de': ^40}{'|': ^2}\n|{f'professores ou alunos comprometida': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
