@@ -906,7 +906,7 @@ def menu_alunos():
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter alunos':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '4':
             if len(Alunos):
-                deletar(Alunos, "AlUNo", "AlunOS")
+                deletar(Alunos, "AlUNos", "AlunOS")
             else:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter alunos':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '0':
@@ -935,7 +935,7 @@ def menu_professores():
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter professores':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '4':
             if len(Professores):
-                deletar(Professores, "professor", "professores")
+                deletar(Professores, "professores", "professores")
             else:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter professores':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '5':
