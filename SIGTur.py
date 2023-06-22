@@ -49,26 +49,6 @@ def salvar_arquivo(dicionario, nome_dicionario):
     with open(f"{nome_dicionario.title()}.json", "w") as file:
         json.dump(dicionario, file)
 
-def verifica_integridade():
-
-    '''
-        Função que vai checar a integridade dos dicionários
-        professores e alunos.
-        
-        Criando uma variável local contendo os dicionários
-        de professores e alunos, verifica a integridade de 
-        ambos, verificando se ainda há elementos neles.
-        Caso ele encontre elementos nos dois, retorna True,
-        caso contrário retorna False.
-    '''
-
-    Alunos = json.load(open('Alunos.json', 'r'))
-    Professores = json.load(open('Professores.json', 'r'))
-
-    if len(Alunos) and len(Professores):
-        return True
-    return False
-
 def verifica_integridade_separadamente(dicionario_nome):
 
     '''
@@ -237,12 +217,12 @@ def atualizar(dicionario, nome_dicionario, nome_salvamento):
         será salvo.
     '''
 
-    verifica = procurar_pessoa(dicionario, nome_dicionario)
-    
+    verifica = procurar_pessoa(dicionario, nome_salvamento)
+
     if verifica:
         while True:
             matricula = input(f"➤  Insira a matricula do {nome_dicionario.lower()} ou digite [0] para sair: ").strip()
-            if not verifica_integridade_separadamente(nome_dicionario):
+            if not verifica_integridade_separadamente(nome_salvamento):
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Integridade do dicionário de': ^40}{'|': ^2}\n|{f'{nome_dicionario.lower()} comprometida': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
                 break
             importar_arquivos()
@@ -306,12 +286,12 @@ def deletar(dicionario, nome_dicionario, nome_salvamento):
         será salvo.
     '''
 
-    verifica = procurar_pessoa(dicionario, nome_dicionario)
+    verifica = procurar_pessoa(dicionario, nome_salvamento)
 
     if verifica:
         while True:
             matricula = input(f"➤  Insira a matricula do {nome_dicionario.lower()} ou digite [0] para sair: ").strip()
-            if not verifica_integridade_separadamente(nome_dicionario):
+            if not verifica_integridade_separadamente(nome_salvamento):
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Integridade do dicionário de': ^40}{'|': ^2}\n|{f'{nome_dicionario.lower()} comprometida': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
                 break
             importar_arquivos()
@@ -351,7 +331,10 @@ def criar_turma():
             break
 
         elif turma != ' ' and turma != '':
-            if turma in Turmas:
+            if not turma.replace(' ', '').isalpha():
+                print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Nome inválido': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
+                continue
+            elif turma in Turmas:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Turma já existente': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
                 continue
             Turmas[turma] = {"Professor": '', "Alunos": []}
@@ -520,7 +503,7 @@ def visualizar_professor_turmas():
                 if qtd_turmas:
                     for turma, info in Turmas.items():
                         if info['Professor'] == matricula:
-                            print(f"{turma: ^30}|{len(info['Alunos']): ^30})")
+                            print(f"{turma: ^30}|{len(info['Alunos']): ^30}")
                 else:
                     print(f"{f'{nome} não possui nenhuma turma': ^60}")
                 print("="*60)
@@ -544,7 +527,7 @@ def visualizar_professor_alunos():
         do aluno.
     '''
 
-    verifica = procurar_pessoa(Professores, 'Professor')
+    verifica = procurar_pessoa(Professores, 'Professores')
 
     if verifica:
         while True:
@@ -739,7 +722,7 @@ def funcao_menu(turma, turma_criada):
 
     while True:
         
-        if not verifica_integridade():
+        if not verifica_integridade_separadamente('Alunos') and verifica_integridade_separadamente('Professores'):
             print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Integridade do dicionário de': ^40}{'|': ^2}\n|{f'professores ou alunos comprometida': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
             break
 
@@ -811,9 +794,12 @@ def funcao_menu(turma, turma_criada):
         elif opcao == '4':
             while True:
                 novo_nome = input(f"\nNome atual: {turma}\n\nInsira o novo nome da turma ou [0] para cancelar ação: ").strip().title()
+
                 if novo_nome == '0':
                     print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Ação interrompida':^40}{'|': ^2}\n╚{'─'*40}╝\n")
                     break
+                elif not novo_nome.replace(' ', '').isalpha():
+                    print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{f'Nome inválido': ^40}{'|': ^2}\n╚{'─'*40}╝\n")
                 elif novo_nome != '' and novo_nome != ' ':
                     informacoes = Turmas[turma]
                     del Turmas[turma]
@@ -901,12 +887,12 @@ def menu_alunos():
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter alunos':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '3':
             if len(Alunos):
-                atualizar(Alunos, "alUnOs", "ALUNoS")
+                atualizar(Alunos, "alUnO", "ALUNoS")
             else:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter alunos':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '4':
             if len(Alunos):
-                deletar(Alunos, "AlUNos", "AlunOS")
+                deletar(Alunos, "AlUNo", "AlunOS")
             else:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter alunos':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '0':
@@ -930,12 +916,12 @@ def menu_professores():
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter professores':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '3':
             if len(Professores):
-                atualizar(Professores, "professores", "ProfessoreS")
+                atualizar(Professores, "professor", "ProfessoreS")
             else:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter professores':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '4':
             if len(Professores):
-                deletar(Professores, "professores", "professores")
+                deletar(Professores, "professor", "professores")
             else:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter professores':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '5':
@@ -945,7 +931,7 @@ def menu_professores():
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter turmas':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '6':
             if len(Turmas):
-                visualizar_professor_alunos
+                visualizar_professor_alunos()
             else:
                 print(f"\n{'⚠': ^42}\n╔{'─'*40}╗\n|{'Precisa ter turmas':^40}{'|': ^2}\n╚{'─'*40}╝\n")
         elif escolha == '0':
